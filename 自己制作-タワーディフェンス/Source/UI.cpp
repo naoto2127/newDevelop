@@ -30,6 +30,12 @@ UI::~UI()
 		delete uiSpiderButton;
 		uiSpiderButton = nullptr;
 	}
+
+	if (uiGolemButton)
+	{
+		delete uiGolemButton;
+		uiGolemButton = nullptr;
+	}
 }
 void UI::Update(float elapsedTime)
 {
