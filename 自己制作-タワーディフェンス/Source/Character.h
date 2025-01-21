@@ -23,10 +23,10 @@ public:
 
 	// 回転設定
 	void SetAngle(const DirectX::XMFLOAT3& angle) { this->angle = angle; }
-	
+
 	// スケール取得
 	const DirectX::XMFLOAT3& GetScale() const { return scale; }
-	
+
 	// スケール設定
 	void SetScale(const DirectX::XMFLOAT3& scale) { this->scale = scale; }
 
@@ -99,6 +99,8 @@ protected:
 		0,0,1,0,	// 前方向
 		0,0,0,1
 	};
+
+	DirectX::XMFLOAT3 target{};
 
 	// 半径
 	float radius = 0.5f;

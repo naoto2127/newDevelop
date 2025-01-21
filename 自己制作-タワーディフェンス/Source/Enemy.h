@@ -23,5 +23,6 @@ public:
 
 	// その他のメンバ関数（位置、半径）
 	DirectX::XMFLOAT3 GetPosition() const { return position; }
+	DirectX::XMFLOAT3 GetTarget() const { return target; }
 	float GetRadius() const { return radius; }
 };

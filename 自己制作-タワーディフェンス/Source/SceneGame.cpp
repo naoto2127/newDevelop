@@ -69,6 +69,9 @@ void SceneGame::Initialize()
 		//ゲージスプライト
 		gauge = new Sprite();
 		
+		//進行方向の矢印表示
+		uiArrows = new Sprite("Data/Sprite/Arrow.png");
+		
 		//UIボタン表示
 		ui = new UI();
 
@@ -237,6 +240,7 @@ void SceneGame::Render()
 	// 2Dスプライト描画
 	{
 		//RenderEnemyGauge(dc, rc.view, rc.projection);
+		RenderEnemyArrows(dc, rc.view, rc.projection);
 
 		if (ui)
 		{
@@ -407,5 +411,49 @@ void SceneGame::RenderEnemyGauge(
 			//EnemyManagerに登録する
 			EnemyManager::Instance().Register(spider);
 		}
+	}
+}
+
+// エネミーの進行方向に矢印を表示する関数
+void SceneGame::RenderEnemyArrows(
+	ID3D11DeviceContext* dc,
+	const DirectX::XMFLOAT4X4& view,
+	const DirectX::XMFLOAT4X4& projection)
+{
+	EnemyManager& enemyManager = EnemyManager::Instance();
+
+	for (int i = 0; i < enemyManager.GetEnemyCount(); i++)
+	{
+		Enemy* enemy = enemyManager.GetEnemy(i);
+
+		// エネミーが向かうターゲット（例えば、砦）
+		DirectX::XMFLOAT3 enemyPos = enemy->GetPosition();
+		DirectX::XMFLOAT3 targetPos = enemy->GetTarget();
+
+		// 進行方向のベクトルを計算
+		DirectX::XMFLOAT3 direction = {
+			targetPos.x - enemyPos.x,
+			targetPos.y - enemyPos.y,
+			targetPos.z - enemyPos.z
+		};
+
+		// 進行方向からY軸を基準に回転角度を計算
+		float rotation = atan2f(direction.x, direction.z); // Y軸回転
+
+		// 画面上の位置計算
+		DirectX::XMFLOAT2 screenPosition = { enemyPos.x, enemyPos.z };  // この位置で矢印を描画
+
+		// 矢印の描画
+		uiArrows->Render(dc,
+			screenPosition.x,
+			screenPosition.y,
+			50.0f, // 矢印のサイズ
+			50.0f, // 矢印のサイズ
+			0, 0,
+			static_cast<float>(uiArrows->GetTextureWidth()),
+			static_cast<float>(uiArrows->GetTextureHeight()),
+			rotation, // 回転行列
+			1.0f, 0.0f, 0.0f, 1.0f
+		);
 	}
 }

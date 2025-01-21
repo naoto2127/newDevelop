@@ -37,6 +37,8 @@ private:
 		const DirectX::XMFLOAT4X4& projection
 	);
 
+	void RenderEnemyArrows(ID3D11DeviceContext* dc, const DirectX::XMFLOAT4X4& view, const DirectX::XMFLOAT4X4& projection);
+
 	//UI表示
 	void RenderUIButton(
 		ID3D11DeviceContext* dc,
@@ -59,6 +61,9 @@ private:
 	CameraController* cameraController = nullptr;
 
 	Sprite* gauge{};
+
+	//進行方向の矢印表示
+	Sprite* uiArrows{};
 
 	//砦の初期設定
 	static const int numFort = 3;

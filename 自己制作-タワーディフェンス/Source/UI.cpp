@@ -139,6 +139,8 @@ void UI::Render()
 			uiGolemButton->GetTextureWidth(), uiGolemButton->GetTextureHeight(),
 			0,
 			golemAlpha, golemAlpha, golemAlpha, 1.0f);
+
+
 	}
 }
 

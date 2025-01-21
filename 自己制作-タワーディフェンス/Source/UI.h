@@ -31,6 +31,7 @@ public:
 
 private:
 
+
 	Sprite* uiSpiderButton = nullptr;
 	Sprite* uiGolemButton = nullptr;
 
