@@ -74,7 +74,7 @@ void SceneGame::Initialize()
 
 		// スパイダースポーンコールバックを設定する
 		ui->SetSpawnSpiderCallback([this]() {
-			if (isSpiderButtonEnabled)
+			if (ui->GetButtonSpider())
 			{
 				EnemySpider* spider = new EnemySpider();
 				spider->SetPosition(playerTower->GetPosition());
@@ -82,17 +82,17 @@ void SceneGame::Initialize()
 				EnemyManager::Instance().Register(spider);
 
 				// 最後にスポーンした時間をリセット
-				coolDownTimeSpider = 0.0f;
+				ui->SetCooldownTimerSpider({});
 
 				// ボタンを無効化してクールダウン中
-				isSpiderButtonEnabled = false;
+				ui->SetButtonSpider(false);
 
 			}
 		});
 
 		// ゴーレムスポーンコールバックを設定する
 		ui->SetSpawnGolemCallback([this]() {
-			if (isGolemButtonEnabled)
+			if (ui->GetButtonGolem())
 			{
 				EnemyGolem* golem = new EnemyGolem();
 				golem->SetPosition(playerTower->GetPosition());
@@ -100,10 +100,10 @@ void SceneGame::Initialize()
 				EnemyManager::Instance().Register(golem);
 
 				// 最後にスポーンした時間をリセット
-				coolDownTimeGolem = 0.0f;
+				ui->SetCooldownTimerGolem({});
 
 				// ボタンを無効化してクールダウン中
-				isGolemButtonEnabled = false;
+				ui->SetButtonGolem(false);
 
 			}
 		});
@@ -147,19 +147,6 @@ void SceneGame::Finalize()
 // 更新処理
 void SceneGame::Update(float elapsedTime)
 {
-	// 時間を加算してクールダウンを更新
-	coolDownTimeSpider += elapsedTime;
-	coolDownTimeGolem += elapsedTime;
-
-	// クールダウンが終了したらボタンを再有効化
-	if (coolDownTimeSpider >= SPAWN_COOLDOWN_TIME) {
-		isSpiderButtonEnabled = true;
-	}
-
-	if (coolDownTimeGolem >= SPAWN_COOLDOWN_TIME) {
-		isGolemButtonEnabled = true;
-	}
-
 	// カメラコントローラー更新処理
 	DirectX::XMFLOAT3 target = playerTower->GetPosition();
 	target.y += 0.5f;
@@ -271,8 +258,8 @@ void SceneGame::Render()
 				ImGui::TreePop();
 			}
 
-			//仮のデバック描画
-			DebugDrawGUI();
+			//UIのデバック描画
+			ui->DrawDebugGUI();
 
 			ImGui::TreePop();
 		}
@@ -420,20 +407,5 @@ void SceneGame::RenderEnemyGauge(
 			//EnemyManagerに登録する
 			EnemyManager::Instance().Register(spider);
 		}
-	}
-}
-
-void SceneGame::DebugDrawGUI()
-{
-	// デバッグ情報表示
-	if (ImGui::CollapsingHeader("Spawn Time & Button States", ImGuiTreeNodeFlags_DefaultOpen))
-	{
-		// 最後にスポーンした時間
-		ImGui::Text("Last Spawn Time Spider: %.2f", coolDownTimeSpider);
-		ImGui::Text("Last Spawn Time Golem: %.2f", coolDownTimeGolem);
-
-		// ボタンが有効かどうかを管理するフラグ
-		ImGui::Checkbox("Spider Button Enabled", &isSpiderButtonEnabled);
-		ImGui::Checkbox("Golem Button Enabled", &isGolemButtonEnabled);
 	}
 }

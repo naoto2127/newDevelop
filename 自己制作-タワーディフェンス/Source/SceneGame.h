@@ -67,16 +67,7 @@ private:
 	Tower* enemyTower = {}; // タワーポインタ配列を初期化
 
 	UI* ui{};
-	// クールダウンの間隔（秒）
 
-	const float SPAWN_COOLDOWN_TIME = 2.0f; // 例えば2秒のクールダウン
-
-	// 最後にスポーンした時間
-	float coolDownTimeSpider = -SPAWN_COOLDOWN_TIME;
-	float coolDownTimeGolem = -SPAWN_COOLDOWN_TIME;
-	// ボタンが有効かどうかを管理するフラグ
-	bool isSpiderButtonEnabled = true;
-	bool isGolemButtonEnabled = true;
 
 private:
 	float positionX; // ボタンのX座標
