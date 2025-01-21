@@ -168,11 +168,9 @@ void SceneGame::Update(float elapsedTime)
 
 	//UI表示
 	ui->Update(elapsedTime);
-	//オブジェクト更新処理
-	{
-		//砦の更新処理
-		TowerManager::Instance().Update(elapsedTime);
-	}
+	
+	//砦の更新処理
+	TowerManager::Instance().Update(elapsedTime);
 
 	//ステージ更新処理
 	StageManager::Instance().Update(elapsedTime);
@@ -180,6 +178,7 @@ void SceneGame::Update(float elapsedTime)
 	// エネミー更新処理
 	EnemyManager::Instance().Update(elapsedTime);
 
+	//当たり判定処理
 	//player->CollisionPlayerVsEnemies();
 
 	// エフェクト更新処理

@@ -144,15 +144,11 @@
     <ClInclude Include="Source\Logger.h" />
     <ClInclude Include="Source\Misc.h" />
     <ClInclude Include="Source\Object.h" />
-    <ClInclude Include="Source\ProjectileHoming.h" />
-    <ClInclude Include="Source\ProjectileManager.h" />
-    <ClInclude Include="Source\ProjectileStraight.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneGame.h" />
     <ClInclude Include="Source\SceneLoading.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\SceneTitle.h" />
-    <ClInclude Include="Source\Projectile.h" />
     <ClInclude Include="Source\EnemySpider.h" />
     <ClInclude Include="Source\Stage.h" />
     <ClInclude Include="Source\StageMain.h" />
@@ -194,10 +190,6 @@
     <ClCompile Include="Source\Logger.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Object.cpp" />
-    <ClCompile Include="Source\Projectile.cpp" />
-    <ClCompile Include="Source\ProjectileHoming.cpp" />
-    <ClCompile Include="Source\ProjectileManager.cpp" />
-    <ClCompile Include="Source\ProjectileStraight.cpp" />
     <ClCompile Include="Source\SceneGame.cpp" />
     <ClCompile Include="Source\SceneLoading.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />

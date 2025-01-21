@@ -37,9 +37,6 @@
     <Filter Include="Source\Effect">
       <UniqueIdentifier>{c8fb682d-f1cd-462d-8f16-2f0976d8160e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Projectile">
-      <UniqueIdentifier>{3d9c955b-dcb8-4e3d-ba07-88e0c0367dbd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Scene">
       <UniqueIdentifier>{57a07695-7d68-4905-81aa-69f78cc1c409}</UniqueIdentifier>
     </Filter>
@@ -49,11 +46,11 @@
     <Filter Include="Source\Stage">
       <UniqueIdentifier>{3c86fa87-5c4b-4353-8c25-d196dd2ed0e4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Object\Other">
-      <UniqueIdentifier>{cc100412-5c49-4b23-a8c4-dc555b6294b3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\UI">
       <UniqueIdentifier>{19a42391-0faf-423b-915e-d5cb55ceb103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Other">
+      <UniqueIdentifier>{cc100412-5c49-4b23-a8c4-dc555b6294b3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +133,7 @@
       <Filter>Source\Character</Filter>
     </ClInclude>
     <ClInclude Include="Source\Collision.h">
-      <Filter>Source\Object\Other</Filter>
+      <Filter>Source\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\Effect.h">
       <Filter>Source\Effect</Filter>
@@ -151,28 +148,16 @@
       <Filter>Source\Character</Filter>
     </ClInclude>
     <ClInclude Include="Source\Framework.h">
-      <Filter>Source\Object\Other</Filter>
+      <Filter>Source\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\HighResolutionTimer.h">
-      <Filter>Source\Object\Other</Filter>
+      <Filter>Source\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\Logger.h">
-      <Filter>Source\Object\Other</Filter>
+      <Filter>Source\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\Misc.h">
-      <Filter>Source\Object\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Projectile.h">
-      <Filter>Source\Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ProjectileHoming.h">
-      <Filter>Source\Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ProjectileManager.h">
-      <Filter>Source\Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ProjectileStraight.h">
-      <Filter>Source\Projectile</Filter>
+      <Filter>Source\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\SceneGame.h">
       <Filter>Source\Scene</Filter>
@@ -285,7 +270,7 @@
       <Filter>Source\Character</Filter>
     </ClCompile>
     <ClCompile Include="Source\Collision.cpp">
-      <Filter>Source\Object\Other</Filter>
+      <Filter>Source\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\Effect.cpp">
       <Filter>Source\Effect</Filter>
@@ -300,25 +285,13 @@
       <Filter>Source\Character</Filter>
     </ClCompile>
     <ClCompile Include="Source\Framework.cpp">
-      <Filter>Source\Object\Other</Filter>
+      <Filter>Source\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\Logger.cpp">
-      <Filter>Source\Object\Other</Filter>
+      <Filter>Source\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\Main.cpp">
-      <Filter>Source\Object\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Projectile.cpp">
-      <Filter>Source\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ProjectileHoming.cpp">
-      <Filter>Source\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ProjectileManager.cpp">
-      <Filter>Source\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ProjectileStraight.cpp">
-      <Filter>Source\Projectile</Filter>
+      <Filter>Source\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\SceneGame.cpp">
       <Filter>Source\Scene</Filter>

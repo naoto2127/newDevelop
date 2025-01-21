@@ -2,6 +2,7 @@
 #include <Input/Input.h>
 
 UI::UI()
+	: cooldownTimerSpider(0.0f), cooldownTimerGolem(0.0f), cooldownDuration(1.5f)  // クールダウン時間1.5秒
 {
 	uiSpiderButton = new Sprite("Data/Sprite/UIButtonSpider.png");
 	uiGolemButton = new Sprite("Data/Sprite/UIButtonGolem.png");
@@ -40,6 +41,17 @@ UI::~UI()
 void UI::Update(float elapsedTime)
 {
 	Mouse& mouse = Input::Instance().GetMouse();
+	
+	// スパイダーボタンのクールダウンタイマーを更新
+	if (cooldownTimerSpider > 0.0f) {
+		cooldownTimerSpider -= elapsedTime;
+	}
+
+	// ゴーレムボタンのクールダウンタイマーを更新
+	if (cooldownTimerGolem > 0.0f) {
+		cooldownTimerGolem -= elapsedTime;
+	}
+
 	// マウスを左クリックしたとき
 	if (mouse.GetButtonDown() & Mouse::BTN_LEFT)
 	{
@@ -50,22 +62,27 @@ void UI::Update(float elapsedTime)
 		if (mouseX >= uiPositionSpider.x &&
 			mouseX <= uiPositionSpider.x + uiSpiderButton->GetTextureWidth() &&
 			mouseY >= uiPositionSpider.y &&
-			mouseY <= uiPositionSpider.y + uiSpiderButton->GetTextureHeight())
+			mouseY <= uiPositionSpider.y + uiSpiderButton->GetTextureHeight() &&
+			cooldownTimerSpider <= 0.0f // クールダウンが終了しているか
+			)
 		{
 			if (spawnSpiderCallback) {
 				spawnSpiderCallback();
 			}
+			cooldownTimerSpider = cooldownDuration;  // クールダウンタイマーをセット
 		}
 
-		// ゴーレムボタンがクリックされたかどうかを確認します
+		// ゴーレムボタンがクリックされたかどうかを確認
 		if (mouseX >= uiPositionGolem.x &&
 			mouseX <= uiPositionGolem.x + uiGolemButton->GetTextureWidth() &&
 			mouseY >= uiPositionGolem.y &&
-			mouseY <= uiPositionGolem.y + uiGolemButton->GetTextureHeight())
+			mouseY <= uiPositionGolem.y + uiGolemButton->GetTextureHeight() &&
+			cooldownTimerGolem <= 0.0f)  // クールダウンが終了しているか
 		{
 			if (spawnGolemCallback) {
 				spawnGolemCallback();
 			}
+			cooldownTimerGolem = cooldownDuration;  // クールダウンタイマーをセット
 		}
 	}
 }
@@ -86,25 +103,28 @@ void UI::Render()
 		float textureWidth = static_cast<float>(uiSpiderButton->GetTextureWidth());
 		float textureHeight = static_cast<float>(uiSpiderButton->GetTextureHeight());
 
-		// モンスターボタン（蜘蛛）の描画
+		// スパイダーボタンを半透明で描画
+		float spiderAlpha = (cooldownTimerSpider > 0.0f) ? 0.5f : 1.0f; // クールダウン中は半透明
 		uiSpiderButton->Render(dc,
 			uiPositionSpider.x, uiPositionSpider.y,
-			textureWidth, textureHeight,
-			0, 0, 
-			textureWidth, textureHeight,
+			static_cast<float>(uiSpiderButton->GetTextureWidth()), static_cast<float>(uiSpiderButton->GetTextureHeight()),
+			0, 0,
+			uiSpiderButton->GetTextureWidth(), uiSpiderButton->GetTextureHeight(),
 			0,
-			1, 1, 1, 1);
+			spiderAlpha, spiderAlpha, spiderAlpha, 1.0f);
 
 		textureWidth = static_cast<float>(uiGolemButton->GetTextureWidth());
 		textureHeight = static_cast<float>(uiGolemButton->GetTextureHeight());
-		// モンスターボタン（ゴーレム）描画
+		
+		// ゴーレムボタンを半透明で描画
+		float golemAlpha = (cooldownTimerGolem > 0.0f) ? 0.5f : 1.0f; // クールダウン中は半透明
 		uiGolemButton->Render(dc,
 			uiPositionGolem.x, uiPositionGolem.y,
-			textureWidth, textureHeight,
+			static_cast<float>(uiGolemButton->GetTextureWidth()), static_cast<float>(uiGolemButton->GetTextureHeight()),
 			0, 0,
-			textureWidth, textureHeight,
+			uiGolemButton->GetTextureWidth(), uiGolemButton->GetTextureHeight(),
 			0,
-			1, 1, 1, 1);
+			golemAlpha, golemAlpha, golemAlpha, 1.0f);
 	}
 }
 

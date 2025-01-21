@@ -29,6 +29,10 @@ private:
 	std::function<void()> spawnSpiderCallback;
 	std::function<void()> spawnGolemCallback;
 
+	float cooldownTimerSpider;  // スパイダーボタンのクールダウンタイマー
+	float cooldownTimerGolem;   // ゴーレムボタンのクールダウンタイマー
+	const float cooldownDuration; // クールダウンの時間 (秒)
+
 	Graphics& graphics = Graphics::Instance();
 	float screenWidth = static_cast<float>(graphics.GetScreenWidth());
 	float screenHeight = static_cast<float>(graphics.GetScreenHeight());
