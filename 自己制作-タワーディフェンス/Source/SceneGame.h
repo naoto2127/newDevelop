@@ -72,8 +72,8 @@ private:
 	const float SPAWN_COOLDOWN_TIME = 2.0f; // 例えば2秒のクールダウン
 
 	// 最後にスポーンした時間
-	float lastSpawnTimeSpider = -SPAWN_COOLDOWN_TIME;
-	float lastSpawnTimeGolem = -SPAWN_COOLDOWN_TIME;
+	float coolDownTimeSpider = -SPAWN_COOLDOWN_TIME;
+	float coolDownTimeGolem = -SPAWN_COOLDOWN_TIME;
 	// ボタンが有効かどうかを管理するフラグ
 	bool isSpiderButtonEnabled = true;
 	bool isGolemButtonEnabled = true;

@@ -154,7 +154,6 @@
     <ClInclude Include="Source\SceneTitle.h" />
     <ClInclude Include="Source\Projectile.h" />
     <ClInclude Include="Source\EnemySpider.h" />
-    <ClInclude Include="Source\EnemySkeleton.h" />
     <ClInclude Include="Source\Stage.h" />
     <ClInclude Include="Source\StageMain.h" />
     <ClInclude Include="Source\StageManager.h" />
@@ -204,7 +203,6 @@
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\SceneTitle.cpp" />
     <ClCompile Include="Source\EnemySpider.cpp" />
-    <ClCompile Include="Source\EnemySkeleton.cpp" />
     <ClCompile Include="Source\StageMain.cpp" />
     <ClCompile Include="Source\StageManager.cpp" />
     <ClCompile Include="Source\Tower.cpp" />
