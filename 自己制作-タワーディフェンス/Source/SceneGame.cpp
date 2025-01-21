@@ -6,12 +6,12 @@
 #include "StageMain.h"
 #include "EnemySpider.h"
 #include "EnemyGolem.h"
+#include "EnemySkeleton.h"
 #include "EnemyManager.h"
 #include <EffectManager.h>
 #include "TowerManager.h"
 #include "Tower.h"
 #include "Input/Input.h"
-#include <iterator> // std::size を利用するため
 
 
 // 初期化
@@ -39,10 +39,18 @@ void SceneGame::Initialize()
 
 	// カメラコントローラー初期化
 	cameraController = new CameraController();
-
 	cameraController->SetRange(40);
 	cameraController->SetAngle({ DirectX::XMConvertToRadians(60), 0, 0 });
 	
+	//敵初期化
+	for (int i = 0; i < 2; i++)
+	{
+		EnemySkeleton* skeleton = new EnemySkeleton();
+		DirectX::XMFLOAT3 position = { -5.0f + i * 10.0f, 0.0f, 10.0f };
+		skeleton->SetPosition({position});
+		EnemyManager::Instance().Register(skeleton);
+	}
+
 	//タワー初期化
 	playerTower = new Tower(); // タワー生成
 	playerTower->SetPosition({ 0, 0, -25 }); // 位置設定
@@ -75,19 +83,39 @@ void SceneGame::Initialize()
 
 		// スパイダースポーンコールバックを設定する
 		ui->SetSpawnSpiderCallback([this]() {
-			EnemySpider* spider = new EnemySpider();
-			spider->SetPosition(playerTower->GetPosition());
-			spider->SetTarget(fort[0]);
-			EnemyManager::Instance().Register(spider);
-			});
+			if (isSpiderButtonEnabled)
+			{
+				EnemySpider* spider = new EnemySpider();
+				spider->SetPosition(playerTower->GetPosition());
+				spider->SetTarget(fort[0]);
+				EnemyManager::Instance().Register(spider);
+
+				// 最後にスポーンした時間をリセット
+				lastSpawnTimeSpider = 0.0f;
+
+				// ボタンを無効化してクールダウン中
+				isSpiderButtonEnabled = false;
+
+			}
+		});
 
 		// ゴーレムスポーンコールバックを設定する
 		ui->SetSpawnGolemCallback([this]() {
-			EnemyGolem* golem = new EnemyGolem();
-			golem->SetPosition(playerTower->GetPosition());
-			golem->SetTarget(fort[2]);
-			EnemyManager::Instance().Register(golem);
-			});
+			if (isGolemButtonEnabled)
+			{
+				EnemyGolem* golem = new EnemyGolem();
+				golem->SetPosition(playerTower->GetPosition());
+				golem->SetTarget(fort[2]);
+				EnemyManager::Instance().Register(golem);
+
+				// 最後にスポーンした時間をリセット
+				lastSpawnTimeGolem = 0.0f;
+
+				// ボタンを無効化してクールダウン中
+				isGolemButtonEnabled = false;
+
+			}
+		});
 	}
 
 }
@@ -128,6 +156,19 @@ void SceneGame::Finalize()
 // 更新処理
 void SceneGame::Update(float elapsedTime)
 {
+	// 時間を加算してクールダウンを更新
+	lastSpawnTimeSpider += elapsedTime;
+	lastSpawnTimeGolem += elapsedTime;
+
+	// クールダウンが終了したらボタンを再有効化
+	if (lastSpawnTimeSpider >= SPAWN_COOLDOWN_TIME) {
+		isSpiderButtonEnabled = true;
+	}
+
+	if (lastSpawnTimeGolem >= SPAWN_COOLDOWN_TIME) {
+		isGolemButtonEnabled = true;
+	}
+
 	// カメラコントローラー更新処理
 	DirectX::XMFLOAT3 target = playerTower->GetPosition();
 	target.y += 0.5f;
@@ -232,8 +273,16 @@ void SceneGame::Render()
 	{
 		if (ImGui::TreeNode("Object"))
 		{
-			//砦のデバック描画　
-			TowerManager::Instance().DrawDebugGUI();
+			if (ImGui::TreeNode("TowerManager"))
+			{
+				//砦のデバック描画　
+				TowerManager::Instance().DrawDebugGUI();
+
+				ImGui::TreePop();
+			}
+
+			//仮のデバック描画
+			DebugDrawGUI();
 
 			ImGui::TreePop();
 		}
@@ -381,5 +430,20 @@ void SceneGame::RenderEnemyGauge(
 			//EnemyManagerに登録する
 			EnemyManager::Instance().Register(spider);
 		}
+	}
+}
+
+void SceneGame::DebugDrawGUI()
+{
+	// デバッグ情報表示
+	if (ImGui::CollapsingHeader("Spawn Time & Button States", ImGuiTreeNodeFlags_DefaultOpen))
+	{
+		// 最後にスポーンした時間
+		ImGui::Text("Last Spawn Time Spider: %.2f", lastSpawnTimeSpider);
+		ImGui::Text("Last Spawn Time Golem: %.2f", lastSpawnTimeGolem);
+
+		// ボタンが有効かどうかを管理するフラグ
+		ImGui::Checkbox("Spider Button Enabled", &isSpiderButtonEnabled);
+		ImGui::Checkbox("Golem Button Enabled", &isGolemButtonEnabled);
 	}
 }

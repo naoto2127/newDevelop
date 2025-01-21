@@ -216,6 +216,9 @@
     <ClInclude Include="Source\UI.h">
       <Filter>Source\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EnemySkeleton.h">
+      <Filter>Source\Character</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="External\imgui\imgui.cpp">
@@ -355,6 +358,9 @@
     </ClCompile>
     <ClCompile Include="Source\UI.cpp">
       <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemySkeleton.cpp">
+      <Filter>Source\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
