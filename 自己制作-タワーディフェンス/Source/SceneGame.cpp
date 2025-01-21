@@ -4,7 +4,6 @@
 #include "Camera.h"
 #include "StageManager.h"
 #include "StageMain.h"
-#include "EnemySlime.h"
 #include "EnemySpider.h"
 #include "EnemyGolem.h"
 #include "EnemyManager.h"
@@ -22,9 +21,6 @@ void SceneGame::Initialize()
 	StageManager& stageManager = StageManager::Instance();
 	StageMain* stageMain = new StageMain();
 	stageManager.Register(stageMain);
-
-	// プレイヤー初期化
-	player = new Player();
 
 	// カメラ初期設定
 	Graphics& graphics = Graphics::Instance();
@@ -46,17 +42,8 @@ void SceneGame::Initialize()
 
 	cameraController->SetRange(40);
 	cameraController->SetAngle({ DirectX::XMConvertToRadians(60), 0, 0 });
-
-	// エネミー初期化
-	for (int i = 0; i < 2; ++i)
-	{
-		Enemy* enemy = new EnemySlime();
-		enemy->SetPosition({ i * 2.0f, 0, 5 });
-		EnemyManager::Instance().Register(enemy);
-	}
 	
 	//タワー初期化
-
 	playerTower = new Tower(); // タワー生成
 	playerTower->SetPosition({ 0, 0, -25 }); // 位置設定
 	playerTower->SetRotation({ 0, DirectX::XMConvertToRadians(90), 0 }); // 回転設定
@@ -121,13 +108,6 @@ void SceneGame::Finalize()
 	//ステージ初期化
 	StageManager::Instance().Clear();
 
-	// プレイヤー終了化
-	if (player != nullptr)
-	{
-		delete player;
-		player = nullptr;
-	}
-
 	// カメラコントローラー終了化
 	if (cameraController != nullptr)
 	{
@@ -149,13 +129,10 @@ void SceneGame::Finalize()
 void SceneGame::Update(float elapsedTime)
 {
 	// カメラコントローラー更新処理
-	DirectX::XMFLOAT3 target = player->GetPosition();
+	DirectX::XMFLOAT3 target = playerTower->GetPosition();
 	target.y += 0.5f;
 	cameraController->SetTarget(target);
 	cameraController->Update(elapsedTime);
-
-	// プレイヤー更新処理
-	player->Update(elapsedTime);
 
 	//UI表示
 	ui->Update(elapsedTime);
@@ -206,9 +183,6 @@ void SceneGame::Render()
 		// シェーダの開始
 		shader->Begin(dc, rc);
 
-		// プレイヤー描画
-		player->Render(dc, shader);
-
 		// エネミー描画
 		EnemyManager::Instance().Render(dc, shader);
 
@@ -229,9 +203,6 @@ void SceneGame::Render()
 
 	// 3Dデバッグ描画
 	{
-		// プレイヤーデバッグプリミティブ描画
-		player->DrawDebugPrimitive();
-
 		// エネミーデバッグプリミティブ描画
 		EnemyManager::Instance().DrawDebugPrimitive();
 
@@ -261,9 +232,6 @@ void SceneGame::Render()
 	{
 		if (ImGui::TreeNode("Object"))
 		{
-			// プレイヤーデバッグ描画
-			player->DrawDebugGUI();
-
 			//砦のデバック描画　
 			TowerManager::Instance().DrawDebugGUI();
 

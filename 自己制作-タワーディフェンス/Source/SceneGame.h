@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Player.h"
 #include "CameraController.h"
 #include "Scene.h"
 #include "Tower.h"
@@ -56,7 +55,6 @@ private:
 private:
 
 	CameraController* cameraController = nullptr;
-	Player* player = nullptr;
 
 	Sprite* gauge{};
 

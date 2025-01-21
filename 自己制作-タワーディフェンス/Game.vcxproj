@@ -126,7 +126,6 @@
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyGolem.h" />
     <ClInclude Include="Source\EnemyManager.h" />
-    <ClInclude Include="Source\EnemySlime.h" />
     <ClInclude Include="Source\Framework.h" />
     <ClInclude Include="Source\Graphics\DebugRenderer.h" />
     <ClInclude Include="Source\Graphics\Graphics.h" />
@@ -145,7 +144,6 @@
     <ClInclude Include="Source\Logger.h" />
     <ClInclude Include="Source\Misc.h" />
     <ClInclude Include="Source\Object.h" />
-    <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\ProjectileHoming.h" />
     <ClInclude Include="Source\ProjectileManager.h" />
     <ClInclude Include="Source\ProjectileStraight.h" />
@@ -181,7 +179,6 @@
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EnemyGolem.cpp" />
     <ClCompile Include="Source\EnemyManager.cpp" />
-    <ClCompile Include="Source\EnemySlime.cpp" />
     <ClCompile Include="Source\Framework.cpp" />
     <ClCompile Include="Source\Graphics\DebugRenderer.cpp" />
     <ClCompile Include="Source\Graphics\Graphics.cpp" />
@@ -197,7 +194,6 @@
     <ClCompile Include="Source\Logger.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Object.cpp" />
-    <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Projectile.cpp" />
     <ClCompile Include="Source\ProjectileHoming.cpp" />
     <ClCompile Include="Source\ProjectileManager.cpp" />

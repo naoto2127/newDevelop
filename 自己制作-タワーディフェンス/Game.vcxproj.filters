@@ -150,9 +150,6 @@
     <ClInclude Include="Source\EnemyManager.h">
       <Filter>Source\Character</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EnemySlime.h">
-      <Filter>Source\Character</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Framework.h">
       <Filter>Source\Object\Other</Filter>
     </ClInclude>
@@ -164,9 +161,6 @@
     </ClInclude>
     <ClInclude Include="Source\Misc.h">
       <Filter>Source\Object\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Player.h">
-      <Filter>Source\Character</Filter>
     </ClInclude>
     <ClInclude Include="Source\Projectile.h">
       <Filter>Source\Projectile</Filter>
@@ -305,9 +299,6 @@
     <ClCompile Include="Source\EnemyManager.cpp">
       <Filter>Source\Character</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EnemySlime.cpp">
-      <Filter>Source\Character</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Framework.cpp">
       <Filter>Source\Object\Other</Filter>
     </ClCompile>
@@ -316,9 +307,6 @@
     </ClCompile>
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source\Object\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Player.cpp">
-      <Filter>Source\Character</Filter>
     </ClCompile>
     <ClCompile Include="Source\Projectile.cpp">
       <Filter>Source\Projectile</Filter>
