@@ -25,8 +25,6 @@ public:
 	//目標位置設定
 	void SetTarget(Tower* target) { this->target = target; }
 
-	void Attack()override;
-
 private:
 	//アニメーション更新処理
 	void UpdateAnimation();

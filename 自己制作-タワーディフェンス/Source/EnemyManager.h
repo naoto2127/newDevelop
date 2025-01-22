@@ -40,12 +40,6 @@ public:
 	// エネミー取得
 	Enemy* GetEnemy(int index) { return enemies.at(index); }
 
-
-
-	void Attack();
-
-
-
 	// 弾丸削除
 	void Remove(Enemy* enemy);
 
