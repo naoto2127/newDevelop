@@ -145,7 +145,6 @@
     <ClInclude Include="Source\Logger.h" />
     <ClInclude Include="Source\Misc.h" />
     <ClInclude Include="Source\Object.h" />
-    <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\PlayerGolem.h" />
     <ClInclude Include="Source\PlayerMonster.h" />
     <ClInclude Include="Source\PlayerMonsterManager.h" />
@@ -201,7 +200,6 @@
     <ClCompile Include="Source\Logger.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Object.cpp" />
-    <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\PlayerGolem.cpp" />
     <ClCompile Include="Source\PlayerMonster.cpp" />
     <ClCompile Include="Source\PlayerMonsterManager.cpp" />
