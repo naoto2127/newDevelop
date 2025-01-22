@@ -5,12 +5,12 @@
 
 
 
-// エネミー
-class Enemy : public Character
+// プレイヤーのモンスター
+class PlayerMonster : public Character
 {
 public:
-	Enemy() {}
-	~Enemy() override {}
+	PlayerMonster() {}
+	~PlayerMonster() override {}
 
 	// 更新処理
 	virtual void Update(float elapsedTime) = 0;
@@ -28,6 +28,5 @@ public:
 
 	// その他のメンバ関数（位置、半径）
 	DirectX::XMFLOAT3 GetPosition() const { return position; }
-	DirectX::XMFLOAT3 GetTarget() const { return target; }
 	float GetRadius() const { return radius; }
 };
