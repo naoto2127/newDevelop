@@ -13,19 +13,15 @@
 #include "Input/Input.h"
 
 
-#include"PlayerMonsterManager.h"
-#include"PlayerGolem.h"
-#include"PlayerSpider.h"
-
-// åˆæœŸåŒ–
+// ‰Šú‰»
 void SceneGame::Initialize()
 {
-	//ã‚¹ãƒ†ãƒ¼ã‚¸åˆæœŸåŒ–
+	//ƒXƒe[ƒW‰Šú‰»
 	StageManager& stageManager = StageManager::Instance();
 	StageMain* stageMain = new StageMain();
 	stageManager.Register(stageMain);
 
-	// ã‚«ãƒ¡ãƒ©åˆæœŸè¨­å®š
+	// ƒJƒƒ‰‰Šúİ’è
 	Graphics& graphics = Graphics::Instance();
 	Camera& camera = Camera::Instance();
 	camera.SetLookAt(
@@ -40,29 +36,28 @@ void SceneGame::Initialize()
 		1000.0f
 	);
 
-	// ã‚«ãƒ¡ãƒ©ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼åˆæœŸåŒ–
+	// ƒJƒƒ‰ƒRƒ“ƒgƒ[ƒ‰[‰Šú‰»
 	cameraController = new CameraController();
 	cameraController->SetRange(40);
 	cameraController->SetAngle({ DirectX::XMConvertToRadians(60), 0, 0 });
-
 	
 
-	//ã‚¿ãƒ¯ãƒ¼åˆæœŸåŒ–
-	playerTower = new Tower(); // ã‚¿ãƒ¯ãƒ¼ç”Ÿæˆ
-	playerTower->SetPosition({ 0, 0, -25 }); // ä½ç½®è¨­å®š
-	playerTower->SetRotation({ 0, DirectX::XMConvertToRadians(90), 0 }); // å›è»¢è¨­å®š
+	//ƒ^ƒ[‰Šú‰»
+	playerTower = new Tower(); // ƒ^ƒ[¶¬
+	playerTower->SetPosition({ 0, 0, -25 }); // ˆÊ’uİ’è
+	playerTower->SetRotation({ 0, DirectX::XMConvertToRadians(90), 0 }); // ‰ñ“]İ’è
 
-	// ã‚¿ãƒ¯ãƒ¼ã‚’ç®¡ç†ã™ã‚‹ä»•çµ„ã¿ã«ç™»éŒ²
+	// ƒ^ƒ[‚ğŠÇ—‚·‚éd‘g‚İ‚É“o˜^
 	TowerManager::Instance().Register(playerTower);
 
-	enemyTower = new Tower(); // ã‚¿ãƒ¯ãƒ¼ç”Ÿæˆ
-	enemyTower->SetPosition({ 0, 0, 25 }); // ä½ç½®è¨­å®š
-	enemyTower->SetRotation({ 0, DirectX::XMConvertToRadians(-90), 0 }); // å›è»¢è¨­å®š
+	enemyTower = new Tower(); // ƒ^ƒ[¶¬
+	enemyTower->SetPosition({ 0, 0, 25 }); // ˆÊ’uİ’è
+	enemyTower->SetRotation({ 0, DirectX::XMConvertToRadians(-90), 0 }); // ‰ñ“]İ’è
 
-	// ã‚¿ãƒ¯ãƒ¼ã‚’ç®¡ç†ã™ã‚‹ä»•çµ„ã¿ã«ç™»éŒ²
+	// ƒ^ƒ[‚ğŠÇ—‚·‚éd‘g‚İ‚É“o˜^
 	TowerManager::Instance().Register(enemyTower);
 
-	//ç ¦ã®åˆæœŸè¨­å®š
+	//Ô‚Ì‰Šúİ’è
 	for (int i = 0; i < numFort; i++)
 	{
 		fort[i] = new Tower();
@@ -71,24 +66,17 @@ void SceneGame::Initialize()
 	}
 
 	{
-		//ã‚²ãƒ¼ã‚¸ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ
+		//ƒQ[ƒWƒXƒvƒ‰ƒCƒg
 		gauge = new Sprite();
 		
-		//é€²è¡Œæ–¹å‘ã®çŸ¢å°è¡¨ç¤º
+		//is•ûŒü‚Ì–îˆó•\¦
 		uiArrows = new Sprite("Data/Sprite/Arrow.png");
 		
-		//UIãƒœã‚¿ãƒ³è¡¨ç¤º
+		//UIƒ{ƒ^ƒ“•\¦
 		ui = new UI();
 
-		// ã‚¹ãƒ‘ã‚¤ãƒ€ãƒ¼ã‚¹ãƒãƒ¼ãƒ³ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã‚’è¨­å®šã™ã‚‹
+		// ƒXƒpƒCƒ_[ƒXƒ|[ƒ“ƒR[ƒ‹ƒoƒbƒN‚ğİ’è‚·‚é
 		ui->SetSpawnSpiderCallback([this]() {
-
-			Spider* spider = new Spider();
-			spider->SetPosition(playerTower->GetPosition());
-			spider->SetTarget(fort[0]);
-			PlayerMonsterManager::Instance().Register(spider);
-			});
-
 			if (ui->GetButtonSpider())
 			{
 				EnemySpider* spider = new EnemySpider();
@@ -96,53 +84,17 @@ void SceneGame::Initialize()
 				spider->SetTarget(fort[0]);
 				EnemyManager::Instance().Register(spider);
 
-				// æœ€å¾Œã«ã‚¹ãƒãƒ¼ãƒ³ã—ãŸæ™‚é–“ã‚’ãƒªã‚»ãƒƒãƒˆ
+				// ÅŒã‚ÉƒXƒ|[ƒ“‚µ‚½ŠÔ‚ğƒŠƒZƒbƒg
 				ui->SetCooldownTimerSpider({});
 
-				// ãƒœã‚¿ãƒ³ã‚’ç„¡åŠ¹åŒ–ã—ã¦ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³ä¸­
+				// ƒ{ƒ^ƒ“‚ğ–³Œø‰»‚µ‚ÄƒN[ƒ‹ƒ_ƒEƒ“’†
 				ui->SetButtonSpider(false);
 
 			}
 		});
 
-
-		//// ã‚¹ãƒ‘ã‚¤ãƒ€ãƒ¼ã‚¹ãƒãƒ¼ãƒ³ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã‚’è¨­å®šã™ã‚‹
-		//ui->SetSpawnSpiderCallback([this]() {
-		//	EnemySpider* spider = new EnemySpider();
-		//	spider->SetPosition(playerTower->GetPosition());
-		//	spider->SetTarget(fort[0]);
-		//	EnemyManager::Instance().Register(spider);
-		//	});
-
-		// ã‚´ãƒ¼ãƒ¬ãƒ ã‚¹ãƒãƒ¼ãƒ³ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã‚’è¨­å®šã™ã‚‹
+		// ƒS[ƒŒƒ€ƒXƒ|[ƒ“ƒR[ƒ‹ƒoƒbƒN‚ğİ’è‚·‚é
 		ui->SetSpawnGolemCallback([this]() {
-
-			Golem* golem = new Golem();
-			golem->SetPosition(playerTower->GetPosition());
-			golem->SetTarget(fort[2]);
-			PlayerMonsterManager::Instance().Register(golem);
-			});
-
-		//// ã‚´ãƒ¼ãƒ¬ãƒ ã‚¹ãƒãƒ¼ãƒ³ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã‚’è¨­å®šã™ã‚‹
-		//ui->SetSpawnGolemCallback([this]() {
-		//	EnemyGolem* golem = new EnemyGolem();
-		//	golem->SetPosition(playerTower->GetPosition());
-		//	golem->SetTarget(fort[2]);
-		//	EnemyManager::Instance().Register(golem);
-		//	});
-	}
-
-	// ã‚¨ãƒãƒŸãƒ¼åˆæœŸåŒ–
-	for (int i = 0; i < 2; ++i)
-	{
-		int num = 0;
-		num = rand() % 4;
-
-		EnemyGolem* golem = new EnemyGolem();
-		golem->SetPosition(enemyTower->GetPosition());
-		golem->SetTarget(fort[2]);
-		EnemyManager::Instance().Register(golem);
-
 			if (ui->GetButtonGolem())
 			{
 				EnemyGolem* golem = new EnemyGolem();
@@ -150,46 +102,42 @@ void SceneGame::Initialize()
 				golem->SetTarget(fort[2]);
 				EnemyManager::Instance().Register(golem);
 
-				// æœ€å¾Œã«ã‚¹ãƒãƒ¼ãƒ³ã—ãŸæ™‚é–“ã‚’ãƒªã‚»ãƒƒãƒˆ
+				// ÅŒã‚ÉƒXƒ|[ƒ“‚µ‚½ŠÔ‚ğƒŠƒZƒbƒg
 				ui->SetCooldownTimerGolem({});
 
-				// ãƒœã‚¿ãƒ³ã‚’ç„¡åŠ¹åŒ–ã—ã¦ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³ä¸­
+				// ƒ{ƒ^ƒ“‚ğ–³Œø‰»‚µ‚ÄƒN[ƒ‹ƒ_ƒEƒ“’†
 				ui->SetButtonGolem(false);
 
 			}
 		});
-
 	}
 
 }
 
-// çµ‚äº†åŒ–
+// I—¹‰»
 void SceneGame::Finalize()
 {
-	//ã‚²ãƒ¼ã‚¸ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆçµ‚äº†åŒ–
+	//ƒQ[ƒWƒXƒvƒ‰ƒCƒgI—¹‰»
 	if (gauge != nullptr)
 	{
 		delete gauge;
 		gauge = nullptr;
 	}
 
-	// ã‚¨ãƒãƒŸãƒ¼çµ‚äº†åŒ–
+	// ƒGƒlƒ~[I—¹‰»
 	EnemyManager::Instance().Clear();
 
-	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼çµ‚äº†åŒ–
-	PlayerMonsterManager::Instance().Clear();
-
-	//ã‚¹ãƒ†ãƒ¼ã‚¸åˆæœŸåŒ–
+	//ƒXƒe[ƒW‰Šú‰»
 	StageManager::Instance().Clear();
 
-	// ã‚«ãƒ¡ãƒ©ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼çµ‚äº†åŒ–
+	// ƒJƒƒ‰ƒRƒ“ƒgƒ[ƒ‰[I—¹‰»
 	if (cameraController != nullptr)
 	{
 		delete cameraController;
 		cameraController = nullptr;
 	}
 
-	//ã‚¿ãƒ¯ãƒ¼çµ‚äº†åŒ–
+	//ƒ^ƒ[I—¹‰»
 	TowerManager::Instance().Clear();
 
 	if (ui)
@@ -199,50 +147,35 @@ void SceneGame::Finalize()
 	}
 }
 
-// æ›´æ–°å‡¦ç†
+// XVˆ—
 void SceneGame::Update(float elapsedTime)
 {
-	// ã‚«ãƒ¡ãƒ©ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼æ›´æ–°å‡¦ç†
+	// ƒJƒƒ‰ƒRƒ“ƒgƒ[ƒ‰[XVˆ—
 	DirectX::XMFLOAT3 target = playerTower->GetPosition();
 	target.y += 0.5f;
 	cameraController->SetTarget(target);
 	cameraController->Update(elapsedTime);
 
-	//UIè¡¨ç¤º
+	//UI•\¦
 	ui->Update(elapsedTime);
 	
-	//ç ¦ã®æ›´æ–°å‡¦ç†
+	//Ô‚ÌXVˆ—
 	TowerManager::Instance().Update(elapsedTime);
 
-	//ã‚¹ãƒ†ãƒ¼ã‚¸æ›´æ–°å‡¦ç†
+	//ƒXƒe[ƒWXVˆ—
 	StageManager::Instance().Update(elapsedTime);
 	
-	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼æ›´æ–°å‡¦ç†
-	PlayerMonsterManager::Instance().Update(elapsedTime);
-
-	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼æ”»æ’ƒå‡¦ç†(å¾Œã§ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆã«ãã£ã¤ã‘ã‚‹)
-	PlayerMonsterManager::Instance().Attack();
-
-
-	// ã‚¨ãƒãƒŸãƒ¼æ›´æ–°å‡¦ç†
+	// ƒGƒlƒ~[XVˆ—
 	EnemyManager::Instance().Update(elapsedTime);
 
-
-	//ã‚¨ãƒãƒŸãƒ¼æ”»æ’ƒå‡¦ç†(å¾Œã§ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆã«ãã£ã¤ã‘ã‚‹)
-	EnemyManager::Instance().Attack();
-
-	
-
-
-	//å½“ãŸã‚Šåˆ¤å®šå‡¦ç†
-
+	//“–‚½‚è”»’èˆ—
 	//player->CollisionPlayerVsEnemies();
 
-	// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆæ›´æ–°å‡¦ç†
+	// ƒGƒtƒFƒNƒgXVˆ—
 	EffectManager::Instance().Update(elapsedTime);
 }
 
-// æç”»å‡¦ç†
+// •`‰æˆ—
 void SceneGame::Render()
 {
 	Graphics& graphics = Graphics::Instance();
@@ -250,89 +183,86 @@ void SceneGame::Render()
 	ID3D11RenderTargetView* rtv = graphics.GetRenderTargetView();
 	ID3D11DepthStencilView* dsv = graphics.GetDepthStencilView();
 
-	// ç”»é¢ã‚¯ãƒªã‚¢ï¼†ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆè¨­å®š
-	FLOAT color[] = { 0.0f, 0.0f, 0.5f, 1.0f };	// RGBA(0.0ï½1.0)
+	// ‰æ–ÊƒNƒŠƒA•ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgİ’è
+	FLOAT color[] = { 0.0f, 0.0f, 0.5f, 1.0f };	// RGBA(0.0`1.0)
 	dc->ClearRenderTargetView(rtv, color);
 	dc->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	dc->OMSetRenderTargets(1, &rtv, dsv);
 
-	// æç”»å‡¦ç†
+	// •`‰æˆ—
 	RenderContext rc;
-	rc.lightDirection = { 0.0f, -1.0f, 0.0f, 0.0f };	// ãƒ©ã‚¤ãƒˆæ–¹å‘ï¼ˆä¸‹æ–¹å‘ï¼‰
+	rc.lightDirection = { 0.0f, -1.0f, 0.0f, 0.0f };	// ƒ‰ƒCƒg•ûŒüi‰º•ûŒüj
 
-	// ã‚«ãƒ¡ãƒ©ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿è¨­å®š
+	// ƒJƒƒ‰ƒpƒ‰ƒ[ƒ^İ’è
 	Camera& camera = Camera::Instance();
 	rc.view = camera.GetView();
 	rc.projection = camera.GetProjection();
 
-	// 3Dãƒ¢ãƒ‡ãƒ«æç”»
+	// 3Dƒ‚ƒfƒ‹•`‰æ
 	{
 		Shader* shader = graphics.GetShader();
-		// ã‚·ã‚§ãƒ¼ãƒ€ã®é–‹å§‹
+		// ƒVƒF[ƒ_‚ÌŠJn
 		shader->Begin(dc, rc);
 
-		// ã‚¨ãƒãƒŸãƒ¼æç”»
+		// ƒGƒlƒ~[•`‰æ
 		EnemyManager::Instance().Render(dc, shader);
 
-		//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼æç”»
-		PlayerMonsterManager::Instance().Render(dc, shader);
-
-		//ã‚¹ãƒ†ãƒ¼ã‚¸æç”»
+		//ƒXƒe[ƒW•`‰æ
 		StageManager::Instance().Render(dc, shader);
 
-		//ã‚¿ãƒ¯ãƒ¼æç”»
+		//ƒ^ƒ[•`‰æ
 		TowerManager::Instance().Render(dc, shader);
 
-		// ã‚·ã‚§ãƒ¼ãƒ€ã®çµ‚äº†
+		// ƒVƒF[ƒ_‚ÌI—¹
 		shader->End(dc);
 	}
 
-	// 3D ã‚¨ãƒ•ã‚§ã‚¯ãƒˆæç”»
+	// 3D ƒGƒtƒFƒNƒg•`‰æ
 	{
 		EffectManager::Instance().Render(rc.view, rc.projection);
 	}
 
-	// 3Dãƒ‡ãƒãƒƒã‚°æç”»
+	// 3DƒfƒoƒbƒO•`‰æ
 	{
-		// ã‚¨ãƒãƒŸãƒ¼ãƒ‡ãƒãƒƒã‚°ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–æç”»
+		// ƒGƒlƒ~[ƒfƒoƒbƒOƒvƒŠƒ~ƒeƒBƒu•`‰æ
 		EnemyManager::Instance().DrawDebugPrimitive();
 
-		// ãƒ©ã‚¤ãƒ³ãƒ¬ãƒ³ãƒ€ãƒ©æç”»å®Ÿè¡Œ
+		// ƒ‰ƒCƒ“ƒŒƒ“ƒ_ƒ‰•`‰æÀs
 		graphics.GetLineRenderer()->Render(dc, rc.view, rc.projection);
 
-		// ãƒ‡ãƒãƒƒã‚°ãƒ¬ãƒ³ãƒ€ãƒ©æç”»å®Ÿè¡Œ
+		// ƒfƒoƒbƒOƒŒƒ“ƒ_ƒ‰•`‰æÀs
 		graphics.GetDebugRenderer()->Render(dc, rc.view, rc.projection);
 
-		//ã‚¿ãƒ¯ãƒ¼ãƒ‡ãƒãƒƒã‚¯æç”»
+		//ƒ^ƒ[ƒfƒoƒbƒN•`‰æ
 		TowerManager::Instance().DrawDebugPrimitive();
 	}
 
-	// 2Dã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæç”»
+	// 2DƒXƒvƒ‰ƒCƒg•`‰æ
 	{
 		//RenderEnemyGauge(dc, rc.view, rc.projection);
 		RenderEnemyArrows(dc, rc.view, rc.projection);
 
 		if (ui)
 		{
-			//UIè¡¨ç¤º
+			//UI•\¦
 			ui->Render();
 		}
 
 	}
 
-	// 2Dãƒ‡ãƒãƒƒã‚°GUIæç”»
+	// 2DƒfƒoƒbƒOGUI•`‰æ
 	{
 		if (ImGui::TreeNode("Object"))
 		{
 			if (ImGui::TreeNode("TowerManager"))
 			{
-				//ç ¦ã®ãƒ‡ãƒãƒƒã‚¯æç”»ã€€
+				//Ô‚ÌƒfƒoƒbƒN•`‰æ@
 				TowerManager::Instance().DrawDebugGUI();
 
 				ImGui::TreePop();
 			}
 
-			//UIã®ãƒ‡ãƒãƒƒã‚¯æç”»
+			//UI‚ÌƒfƒoƒbƒN•`‰æ
 			ui->DrawDebugGUI();
 
 			ImGui::TreePop();
@@ -345,17 +275,17 @@ void SceneGame::RenderEnemyGauge(
 	const DirectX::XMFLOAT4X4& view,
 	const DirectX::XMFLOAT4X4& projection)
 {
-	//ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆ
+	//ƒrƒ…[ƒ|[ƒg
 	D3D11_VIEWPORT viewport;
 	UINT numViewports = 1;
 	dc->RSGetViewports(&numViewports, &viewport);
 
-	//å¤‰æ›è¡Œåˆ—
+	//•ÏŠ·s—ñ
 	DirectX::XMMATRIX View = DirectX::XMLoadFloat4x4(&view);
 	DirectX::XMMATRIX Projection = DirectX::XMLoadFloat4x4(&projection);
 	DirectX::XMMATRIX World = DirectX::XMMatrixIdentity();
 
-	//å…¨ã¦ã®æ•µã®é ­ä¸Šã«HPã‚²ãƒ¼ã‚¸ã‚’è¡¨ç¤º
+	//‘S‚Ä‚Ì“G‚Ì“ªã‚ÉHPƒQ[ƒW‚ğ•\¦
 	EnemyManager& enemyManager = EnemyManager::Instance();
 	int enemyCount = enemyManager.GetEnemyCount();
 
@@ -363,14 +293,14 @@ void SceneGame::RenderEnemyGauge(
 	{
 		Enemy* enemy = enemyManager.GetEnemy(i);
 
-		//ã‚¨ãƒãƒŸãƒ¼ã®é ­ä¸Šã®ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’è¨ˆç®—
+		//ƒGƒlƒ~[‚Ì“ªã‚Ìƒ[ƒ‹ƒhÀ•W‚ğŒvZ
 		DirectX::XMFLOAT3 worldPosition = enemy->GetPosition();
 		worldPosition.y += enemy->GetHeight();
 
-		//XMVECTORã«å¤‰æ›
+		//XMVECTOR‚É•ÏŠ·
 		DirectX::XMVECTOR WorldPosition = DirectX::XMLoadFloat3(&worldPosition);
 
-		//ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‹ã‚‰ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã¸å¤‰æ›
+		//ƒ[ƒ‹ƒhÀ•W‚©‚çƒXƒNƒŠ[ƒ“À•W‚Ö•ÏŠ·
 		DirectX::XMVECTOR ScreenPosition = DirectX::XMVector3Project(
 			WorldPosition,
 			viewport.TopLeftX,
@@ -384,23 +314,23 @@ void SceneGame::RenderEnemyGauge(
 			World
 		);
 
-		//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã‚’ã€€XMFLOAT2ã€€ã«å¤‰æ›
+		//ƒXƒNƒŠ[ƒ“À•W‚ğ@XMFLOAT2@‚É•ÏŠ·
 		DirectX::XMFLOAT2 screenPosition;
 		DirectX::XMStoreFloat2(&screenPosition, ScreenPosition);
 
-		//ã“ã“ã‹ã‚‰ã¯ã‚²ãƒ¼ã‚¸ã®è¡¨ç¤ºå‡¦ç†
+		//‚±‚±‚©‚ç‚ÍƒQ[ƒW‚Ì•\¦ˆ—
 		const float gaugeWidth = 30.0f;
 		const float gaugeHeight = 5.0f;
 
-		//ç¾åœ¨ã€€HPã€€/ã€€æœ€å¤§HPã‹ã‚‰ã‚²ãƒ¼ã‚¸ã®é•·ã•ã®æ¯”ç‡ã‚’è¨ˆç®—
+		//Œ»İ@HP@/@Å‘åHP‚©‚çƒQ[ƒW‚Ì’·‚³‚Ì”ä—¦‚ğŒvZ
 		float healthRate = enemy->GetHealth() / static_cast<float>(enemy->GetMaxHealth());
 
-		//ã‚²ãƒ¼ã‚¸ã‚’æç”»
+		//ƒQ[ƒW‚ğ•`‰æ
 		gauge->Render(dc,
-			screenPosition.x - gaugeWidth * 0.5f,//è¨ˆç®—ã—ãŸï¼’Dä½ç½®ã‚’ä¸­å¿ƒã«è¡¨ç¤º
-			screenPosition.y - gaugeHeight * 0.5f,//è¨ˆç®—ã—ãŸï¼’Dä½ç½®ã‚’ä¸­å¿ƒã«è¡¨ç¤º
-			gaugeWidth * healthRate,//ã‚²ãƒ¼ã‚¸å¹…ã€€ï¼Šã‚²ãƒ¼ã‚¸ã®é•·ã•ã®æ¯”ç‡
-			gaugeHeight,//ã‚²ãƒ¼ã‚¸ã®é«˜ã•
+			screenPosition.x - gaugeWidth * 0.5f,//ŒvZ‚µ‚½‚QDˆÊ’u‚ğ’†S‚É•\¦
+			screenPosition.y - gaugeHeight * 0.5f,//ŒvZ‚µ‚½‚QDˆÊ’u‚ğ’†S‚É•\¦
+			gaugeWidth * healthRate,//ƒQ[ƒW•@–ƒQ[ƒW‚Ì’·‚³‚Ì”ä—¦
+			gaugeHeight,//ƒQ[ƒW‚Ì‚‚³
 			0, 0,
 			static_cast<float>(gauge->GetTextureWidth()),
 			static_cast<float>(gauge->GetTextureHeight()),
@@ -408,22 +338,22 @@ void SceneGame::RenderEnemyGauge(
 			1.0f, 0.0f, 0.0f, 1.0f
 		);
 	}
-	//ã‚¨ãƒãƒŸãƒ¼é…ç½®å‡¦ç†
+	//ƒGƒlƒ~[”z’uˆ—
 	Mouse& mouse = Input::Instance().GetMouse();
 	if (mouse.GetButtonDown() & Mouse::BTN_LEFT)
 	{
-		//ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«åº§æ¨™ã‚’å–å¾—
+		//ƒ}ƒEƒXƒJ[ƒ\ƒ‹À•W‚ğæ“¾
 		DirectX::XMFLOAT3 screenPosition;
 		screenPosition.x = static_cast<float>(mouse.GetPositionX());
 		screenPosition.y = static_cast<float>(mouse.GetPositionY());
 
 		DirectX::XMVECTOR ScreenPosition, WorldPosition;
 
-		//ãƒ¬ã‚¤ã®å§‹ç‚¹ã‚’è¨ˆç®—ï¼ˆï½šãŒ0.0fï¼‰
+		//ƒŒƒC‚Ìn“_‚ğŒvZi‚š‚ª0.0fj
 		screenPosition.z = 0.0f;
-		//ãƒ¬ã‚¤ã®å§‹ç‚¹ã‚’XMVECTORã«å¤‰æ›
+		//ƒŒƒC‚Ìn“_‚ğXMVECTOR‚É•ÏŠ·
 		ScreenPosition = DirectX::XMLoadFloat3(&screenPosition);
-		//ãƒ¬ã‚¤ã®å§‹ç‚¹ã‚’ï¼’ï¼¤åº§æ¨™ã‹ã‚‰ï¼“ï¼¤åº§æ¨™ã«å¤‰æ›
+		//ƒŒƒC‚Ìn“_‚ğ‚Q‚cÀ•W‚©‚ç‚R‚cÀ•W‚É•ÏŠ·
 		WorldPosition = DirectX::XMVector3Unproject(
 			ScreenPosition,
 			viewport.TopLeftX,
@@ -437,15 +367,15 @@ void SceneGame::RenderEnemyGauge(
 			World
 		);
 
-		//å§‹ç‚¹ã®ä½ç½®ã‚’rayStartã«å…¥ã‚ŒãªãŠã—ã€XMFLOAT3ã«å¤‰æ›
+		//n“_‚ÌˆÊ’u‚ğrayStart‚É“ü‚ê‚È‚¨‚µAXMFLOAT3‚É•ÏŠ·
 		DirectX::XMFLOAT3 rayStart;
 		DirectX::XMStoreFloat3(&rayStart, WorldPosition);
 
-		//ãƒ¬ã‚¤ã®çµ‚ç‚¹ã‚’ç®—å‡ºï¼ˆzãŒ1.0fï¼‰
+		//ƒŒƒC‚ÌI“_‚ğZoiz‚ª1.0fj
 		screenPosition.z = 1.0f;
-		//ãƒ¬ã‚¤ã®çµ‚ç‚¹ã‚’XMVECTORã«å¤‰æ›
+		//ƒŒƒC‚ÌI“_‚ğXMVECTOR‚É•ÏŠ·
 		ScreenPosition = DirectX::XMLoadFloat3(&screenPosition);
-		//ãƒ¬ã‚¤ã®çµ‚ç‚¹ã‚’ï¼’Dåº§æ¨™ã‹ã‚‰ï¼“Dåº§æ¨™ã«å¤‰æ›
+		//ƒŒƒC‚ÌI“_‚ğ‚QDÀ•W‚©‚ç‚RDÀ•W‚É•ÏŠ·
 		WorldPosition = DirectX::XMVector3Unproject(
 			ScreenPosition,
 			viewport.TopLeftX,
@@ -459,32 +389,32 @@ void SceneGame::RenderEnemyGauge(
 			World
 		);
 
-		//çµ‚ç‚¹ã®ä½ç½®ã‚’rayEndã«å…¥ã‚ŒãªãŠã—XMFLOAT3ã«å¤‰æ›
+		//I“_‚ÌˆÊ’u‚ğrayEnd‚É“ü‚ê‚È‚¨‚µXMFLOAT3‚É•ÏŠ·
 		DirectX::XMFLOAT3 rayEnd;
 		DirectX::XMStoreFloat3(&rayEnd, WorldPosition);
 
-		// ã‚¿ãƒ¯ãƒ¼ã®ä½ç½®ã‚’å–å¾—
-		Tower* targetTower = TowerManager::Instance().GetTower(numEnemyTower); // 0 ã¯æœ€åˆã®ã‚¿ãƒ¯ãƒ¼ã‚’æŒ‡å®š
+		// ƒ^ƒ[‚ÌˆÊ’u‚ğæ“¾
+		Tower* targetTower = TowerManager::Instance().GetTower(numEnemyTower); // 0 ‚ÍÅ‰‚Ìƒ^ƒ[‚ğw’è
 		
-		//ãƒ¬ã‚¤ã‚­ãƒ£ã‚¹ãƒˆ
+		//ƒŒƒCƒLƒƒƒXƒg
 		HitResult hit;
 		if (StageManager::Instance().RayCast(rayStart, rayEnd, hit))
 		{
 
 			DirectX::XMFLOAT3 towerPosition = targetTower->GetPosition();
-			//æ•µã‚’ç”Ÿæˆã—
+			//“G‚ğ¶¬‚µ
 			EnemySpider* spider = new EnemySpider();
-			//æ•µã®ä½ç½®ã‚’hit.positionã«ç™»éŒ²ã™ã‚‹
+			//“G‚ÌˆÊ’u‚ğhit.position‚É“o˜^‚·‚é
 			spider->SetPosition(hit.position);
-			//ã“ã®æ•µã‚’playerã«è¿½è·¡ã•ã›ã‚‹
+			//‚±‚Ì“G‚ğplayer‚É’ÇÕ‚³‚¹‚é
 			spider->SetTarget(enemyTower);
-			//EnemyManagerã«ç™»éŒ²ã™ã‚‹
+			//EnemyManager‚É“o˜^‚·‚é
 			EnemyManager::Instance().Register(spider);
 		}
 	}
 }
 
-// ã‚¨ãƒãƒŸãƒ¼ã®é€²è¡Œæ–¹å‘ã«çŸ¢å°ã‚’è¡¨ç¤ºã™ã‚‹é–¢æ•°
+// ƒGƒlƒ~[‚Ìis•ûŒü‚É–îˆó‚ğ•\¦‚·‚éŠÖ”
 void SceneGame::RenderEnemyArrows(
 	ID3D11DeviceContext* dc,
 	const DirectX::XMFLOAT4X4& view,
@@ -496,33 +426,33 @@ void SceneGame::RenderEnemyArrows(
 	{
 		Enemy* enemy = enemyManager.GetEnemy(i);
 
-		// ã‚¨ãƒãƒŸãƒ¼ãŒå‘ã‹ã†ã‚¿ãƒ¼ã‚²ãƒƒãƒˆï¼ˆä¾‹ãˆã°ã€ç ¦ï¼‰
+		// ƒGƒlƒ~[‚ªŒü‚©‚¤ƒ^[ƒQƒbƒgi—á‚¦‚ÎAÔj
 		DirectX::XMFLOAT3 enemyPos = enemy->GetPosition();
 		DirectX::XMFLOAT3 targetPos = enemy->GetTarget();
 
-		// é€²è¡Œæ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
+		// is•ûŒü‚ÌƒxƒNƒgƒ‹‚ğŒvZ
 		DirectX::XMFLOAT3 direction = {
 			targetPos.x - enemyPos.x,
 			targetPos.y - enemyPos.y,
 			targetPos.z - enemyPos.z
 		};
 
-		// é€²è¡Œæ–¹å‘ã‹ã‚‰Yè»¸ã‚’åŸºæº–ã«å›è»¢è§’åº¦ã‚’è¨ˆç®—
-		float rotation = atan2f(direction.x, direction.z); // Yè»¸å›è»¢
+		// is•ûŒü‚©‚çY²‚ğŠî€‚É‰ñ“]Šp“x‚ğŒvZ
+		float rotation = atan2f(direction.x, direction.z); // Y²‰ñ“]
 
-		// ç”»é¢ä¸Šã®ä½ç½®è¨ˆç®—
-		DirectX::XMFLOAT2 screenPosition = { enemyPos.x, enemyPos.z };  // ã“ã®ä½ç½®ã§çŸ¢å°ã‚’æç”»
+		// ‰æ–Êã‚ÌˆÊ’uŒvZ
+		DirectX::XMFLOAT2 screenPosition = { enemyPos.x, enemyPos.z };  // ‚±‚ÌˆÊ’u‚Å–îˆó‚ğ•`‰æ
 
-		// çŸ¢å°ã®æç”»
+		// –îˆó‚Ì•`‰æ
 		uiArrows->Render(dc,
 			screenPosition.x,
 			screenPosition.y,
-			50.0f, // çŸ¢å°ã®ã‚µã‚¤ã‚º
-			50.0f, // çŸ¢å°ã®ã‚µã‚¤ã‚º
+			50.0f, // –îˆó‚ÌƒTƒCƒY
+			50.0f, // –îˆó‚ÌƒTƒCƒY
 			0, 0,
 			static_cast<float>(uiArrows->GetTextureWidth()),
 			static_cast<float>(uiArrows->GetTextureHeight()),
-			rotation, // å›è»¢è¡Œåˆ—
+			rotation, // ‰ñ“]s—ñ
 			1.0f, 0.0f, 0.0f, 1.0f
 		);
 	}
