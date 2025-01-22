@@ -57,19 +57,6 @@ void EnemyManager::DrawDebugPrimitive()
 	}
 }
 
-
-
-void EnemyManager::Attack()
-{
-
-	for (Enemy* enemy : enemies)
-	{
-		enemy->Attack();
-	}
-}
-
-
-
 void EnemyManager::Remove(Enemy* enemy)
 {
 	removes.insert(enemy);
@@ -138,5 +125,5 @@ void EnemyManager::CollisionEnemyVsEnemies()
 
 		}
 	}
-}
-
+}			
+	
