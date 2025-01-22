@@ -96,6 +96,10 @@ void EnemySpider::OnDead()
 	Destroy();
 }
 
+void EnemySpider::Attack()
+{
+}
+
 //void UpdateIdleState(float elapsedTime)
 //{
 //	//タイマー処理

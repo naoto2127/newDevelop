@@ -146,6 +146,10 @@
     <ClInclude Include="Source\Misc.h" />
     <ClInclude Include="Source\Object.h" />
     <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\PlayerGolem.h" />
+    <ClInclude Include="Source\PlayerMonster.h" />
+    <ClInclude Include="Source\PlayerMonsterManager.h" />
+    <ClInclude Include="Source\PlayerSpider.h" />
     <ClInclude Include="Source\ProjectileHoming.h" />
     <ClInclude Include="Source\ProjectileManager.h" />
     <ClInclude Include="Source\ProjectileStraight.h" />
@@ -198,6 +202,10 @@
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Object.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\PlayerGolem.cpp" />
+    <ClCompile Include="Source\PlayerMonster.cpp" />
+    <ClCompile Include="Source\PlayerMonsterManager.cpp" />
+    <ClCompile Include="Source\PlayerSpider.cpp" />
     <ClCompile Include="Source\Projectile.cpp" />
     <ClCompile Include="Source\ProjectileHoming.cpp" />
     <ClCompile Include="Source\ProjectileManager.cpp" />

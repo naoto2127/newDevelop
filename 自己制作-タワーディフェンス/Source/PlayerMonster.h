@@ -5,12 +5,12 @@
 
 
 
-// エネミー
-class Enemy : public Character
+// プレイヤーのモンスター
+class PlayerMonster : public Character
 {
 public:
-	Enemy() {}
-	~Enemy() override {}
+	PlayerMonster() {}
+	~PlayerMonster() override {}
 
 	// 更新処理
 	virtual void Update(float elapsedTime) = 0;
