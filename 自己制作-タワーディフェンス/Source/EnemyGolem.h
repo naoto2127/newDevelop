@@ -2,6 +2,7 @@
 
 #include "Graphics/Model.h"
 #include "Enemy.h"
+#include "PlayerMonster.h"
 #include "Tower.h"
 
 // ゴーレム
@@ -22,9 +23,15 @@ public:
 	//目標位置設定
 	void SetTarget(Tower* target) { this->target = target; }
 
+	void Attack()override;
+
 private:
 	Model* model = nullptr;
-	
+
 	Tower* target = nullptr;//追跡対象
 	float speed = 2.0f;//移動速度
+
+	float range = 10.0f;
+
+	bool attackFlag = false;
 };
