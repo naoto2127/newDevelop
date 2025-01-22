@@ -49,9 +49,6 @@
     <Filter Include="Source\UI">
       <UniqueIdentifier>{19a42391-0faf-423b-915e-d5cb55ceb103}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Other">
-      <UniqueIdentifier>{cc100412-5c49-4b23-a8c4-dc555b6294b3}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="External\imgui\imconfig.h">
@@ -133,7 +130,6 @@
       <Filter>Source\Character</Filter>
     </ClInclude>
     <ClInclude Include="Source\Collision.h">
-      <Filter>Source\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\Effect.h">
       <Filter>Source\Effect</Filter>
@@ -148,16 +144,13 @@
       <Filter>Source\Character</Filter>
     </ClInclude>
     <ClInclude Include="Source\Framework.h">
-      <Filter>Source\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\HighResolutionTimer.h">
-      <Filter>Source\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\Logger.h">
-      <Filter>Source\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\Misc.h">
-      <Filter>Source\Other</Filter>
+
     </ClInclude>
     <ClInclude Include="Source\SceneGame.h">
       <Filter>Source\Scene</Filter>
@@ -270,7 +263,6 @@
       <Filter>Source\Character</Filter>
     </ClCompile>
     <ClCompile Include="Source\Collision.cpp">
-      <Filter>Source\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\Effect.cpp">
       <Filter>Source\Effect</Filter>
@@ -285,13 +277,10 @@
       <Filter>Source\Character</Filter>
     </ClCompile>
     <ClCompile Include="Source\Framework.cpp">
-      <Filter>Source\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\Logger.cpp">
-      <Filter>Source\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\Main.cpp">
-      <Filter>Source\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\SceneGame.cpp">
       <Filter>Source\Scene</Filter>
