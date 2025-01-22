@@ -6,8 +6,6 @@ Tower::Tower()
 {
 	model = new Model("Data/Model/Object/tower.mdl");
 	scale = { 0.02f,0.02f,0.02f };
-	position.z = -25.0f;
-
 	radius *= scale.x;
 	height *= scale.y;
 }
