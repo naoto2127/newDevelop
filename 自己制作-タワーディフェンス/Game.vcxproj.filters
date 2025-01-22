@@ -194,18 +194,6 @@
     <ClInclude Include="Source\UI.h">
       <Filter>Source\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PlayerGolem.h">
-      <Filter>Source\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerSpider.h">
-      <Filter>Source\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerMonster.h">
-      <Filter>Source\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerMonsterManager.h">
-      <Filter>Source\Character</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="External\imgui\imgui.cpp">
@@ -329,18 +317,6 @@
     </ClCompile>
     <ClCompile Include="Source\UI.cpp">
       <Filter>Source\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerGolem.cpp">
-      <Filter>Source\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerSpider.cpp">
-      <Filter>Source\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerMonster.cpp">
-      <Filter>Source\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerMonsterManager.cpp">
-      <Filter>Source\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

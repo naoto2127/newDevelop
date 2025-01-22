@@ -13,10 +13,6 @@
 #include "Input/Input.h"
 
 
-#include"PlayerMonsterManager.h"
-#include"PlayerGolem.h"
-#include"PlayerSpider.h"
-
 // 初期化
 void SceneGame::Initialize()
 {
@@ -44,7 +40,6 @@ void SceneGame::Initialize()
 	cameraController = new CameraController();
 	cameraController->SetRange(40);
 	cameraController->SetAngle({ DirectX::XMConvertToRadians(60), 0, 0 });
-
 	
 
 	//タワー初期化
@@ -82,13 +77,6 @@ void SceneGame::Initialize()
 
 		// スパイダースポーンコールバックを設定する
 		ui->SetSpawnSpiderCallback([this]() {
-
-			Spider* spider = new Spider();
-			spider->SetPosition(playerTower->GetPosition());
-			spider->SetTarget(fort[0]);
-			PlayerMonsterManager::Instance().Register(spider);
-			});
-
 			if (ui->GetButtonSpider())
 			{
 				EnemySpider* spider = new EnemySpider();
@@ -105,44 +93,8 @@ void SceneGame::Initialize()
 			}
 		
 
-
-		//// スパイダースポーンコールバックを設定する
-		//ui->SetSpawnSpiderCallback([this]() {
-		//	EnemySpider* spider = new EnemySpider();
-		//	spider->SetPosition(playerTower->GetPosition());
-		//	spider->SetTarget(fort[0]);
-		//	EnemyManager::Instance().Register(spider);
-		//	});
-
 		// ゴーレムスポーンコールバックを設定する
 		ui->SetSpawnGolemCallback([this]() {
-
-			Golem* golem = new Golem();
-			golem->SetPosition(playerTower->GetPosition());
-			golem->SetTarget(fort[2]);
-			PlayerMonsterManager::Instance().Register(golem);
-			});
-
-		//// ゴーレムスポーンコールバックを設定する
-		//ui->SetSpawnGolemCallback([this]() {
-		//	EnemyGolem* golem = new EnemyGolem();
-		//	golem->SetPosition(playerTower->GetPosition());
-		//	golem->SetTarget(fort[2]);
-		//	EnemyManager::Instance().Register(golem);
-		//	});
-	}
-
-	// エネミー初期化
-	for (int i = 0; i < 2; ++i)
-	{
-		int num = 0;
-		num = rand() % 4;
-
-		EnemyGolem* golem = new EnemyGolem();
-		golem->SetPosition(enemyTower->GetPosition());
-		golem->SetTarget(fort[2]);
-		EnemyManager::Instance().Register(golem);
-
 			if (ui->GetButtonGolem())
 			{
 				EnemyGolem* golem = new EnemyGolem();
@@ -157,8 +109,6 @@ void SceneGame::Initialize()
 				ui->SetButtonGolem(false);
 
 			}
-		
-
 	}
 
 }
@@ -175,9 +125,6 @@ void SceneGame::Finalize()
 
 	// エネミー終了化
 	EnemyManager::Instance().Clear();
-
-	//プレイヤーのモンスター終了化
-	PlayerMonsterManager::Instance().Clear();
 
 	//ステージ初期化
 	StageManager::Instance().Clear();
@@ -217,25 +164,10 @@ void SceneGame::Update(float elapsedTime)
 	//ステージ更新処理
 	StageManager::Instance().Update(elapsedTime);
 	
-	//プレイヤーのモンスター更新処理
-	PlayerMonsterManager::Instance().Update(elapsedTime);
-
-	//プレイヤーのモンスター攻撃処理(後でアップデートにくっつける)
-	PlayerMonsterManager::Instance().Attack();
-
-
 	// エネミー更新処理
 	EnemyManager::Instance().Update(elapsedTime);
 
-
-	//エネミー攻撃処理(後でアップデートにくっつける)
-	EnemyManager::Instance().Attack();
-
-	
-
-
 	//当たり判定処理
-
 	//player->CollisionPlayerVsEnemies();
 
 	// エフェクト更新処理
@@ -273,9 +205,6 @@ void SceneGame::Render()
 
 		// エネミー描画
 		EnemyManager::Instance().Render(dc, shader);
-
-		//プレイヤーのモンスター描画
-		PlayerMonsterManager::Instance().Render(dc, shader);
 
 		//ステージ描画
 		StageManager::Instance().Render(dc, shader);

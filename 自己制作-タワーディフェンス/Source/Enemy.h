@@ -3,8 +3,6 @@
 #include "Graphics/Shader.h"
 #include "Character.h"
 
-
-
 // エネミー
 class Enemy : public Character
 {
@@ -17,9 +15,6 @@ public:
 
 	// 描画処理
 	virtual void Render(ID3D11DeviceContext* dc, Shader* shader) = 0;
-
-	virtual void Attack() = 0;
-
 
 	void Destroy();
 
