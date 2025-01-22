@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Player.h"
 #include "CameraController.h"
 #include "Scene.h"
 #include "Tower.h"
@@ -38,13 +37,17 @@ private:
 		const DirectX::XMFLOAT4X4& projection
 	);
 
+	void RenderEnemyArrows(ID3D11DeviceContext* dc, const DirectX::XMFLOAT4X4& view, const DirectX::XMFLOAT4X4& projection);
+
 	//UI表示
 	void RenderUIButton(
 		ID3D11DeviceContext* dc,
 		const DirectX::XMFLOAT4X4& view,
 		const DirectX::XMFLOAT4X4& projection
 	);
-
+	
+	//デバック表示（後で消す）
+	void DebugDrawGUI();
 private:
 	enum
 	{
@@ -56,9 +59,11 @@ private:
 private:
 
 	CameraController* cameraController = nullptr;
-	Player* player = nullptr;
 
 	Sprite* gauge{};
+
+	//進行方向の矢印表示
+	Sprite* uiArrows{};
 
 	//砦の初期設定
 	static const int numFort = 3;
@@ -67,6 +72,7 @@ private:
 	Tower* enemyTower = {}; // タワーポインタ配列を初期化
 
 	UI* ui{};
+
 
 private:
 	float positionX; // ボタンのX座標

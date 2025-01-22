@@ -2,7 +2,6 @@
 
 #include <d3d11.h>
 #include "Graphics/Shader.h"
-#include "Player.h"
 #include "Object.h"
 
 class Tower : public Object
