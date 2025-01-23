@@ -12,6 +12,10 @@
 #include "Tower.h"
 #include "Input/Input.h"
 
+#include"PlayerMonsterManager.h"
+#include"PlayerGolem.h"
+#include"PlayerSpider.h"
+
 
 // 初期化
 void SceneGame::Initialize()
@@ -40,7 +44,7 @@ void SceneGame::Initialize()
 	cameraController = new CameraController();
 	cameraController->SetRange(40);
 	cameraController->SetAngle({ DirectX::XMConvertToRadians(60), 0, 0 });
-	
+
 
 	//タワー初期化
 	playerTower = new Tower(); // タワー生成
@@ -68,10 +72,10 @@ void SceneGame::Initialize()
 	{
 		//ゲージスプライト
 		gauge = new Sprite();
-		
+
 		//進行方向の矢印表示
 		uiArrows = new Sprite("Data/Sprite/Arrow.png");
-		
+
 		//UIボタン表示
 		ui = new UI();
 
@@ -79,10 +83,10 @@ void SceneGame::Initialize()
 		ui->SetSpawnSpiderCallback([this]() {
 			if (ui->GetButtonSpider())
 			{
-				EnemySpider* spider = new EnemySpider();
+				Spider* spider = new Spider();
 				spider->SetPosition(playerTower->GetPosition());
 				spider->SetTarget(fort[0]);
-				EnemyManager::Instance().Register(spider);
+				PlayerMonsterManager::Instance().Register(spider);
 
 				// 最後にスポーンした時間をリセット
 				ui->SetCooldownTimerSpider({});
@@ -91,16 +95,19 @@ void SceneGame::Initialize()
 				ui->SetButtonSpider(false);
 
 			}
-		
+			});
+
+
+
 
 		// ゴーレムスポーンコールバックを設定する
 		ui->SetSpawnGolemCallback([this]() {
 			if (ui->GetButtonGolem())
 			{
-				EnemyGolem* golem = new EnemyGolem();
+				Golem* golem = new Golem();
 				golem->SetPosition(playerTower->GetPosition());
 				golem->SetTarget(fort[2]);
-				EnemyManager::Instance().Register(golem);
+				PlayerMonsterManager::Instance().Register(golem);
 
 				// 最後にスポーンした時間をリセット
 				ui->SetCooldownTimerGolem({});
@@ -109,9 +116,25 @@ void SceneGame::Initialize()
 				ui->SetButtonGolem(false);
 
 			}
+
+		});
 	}
 
+	// エネミー初期化
+	for (int i = 0; i < 2; ++i)
+	{
+		int num = 0;
+		num = rand() % 4;
+		EnemyGolem* golem = new EnemyGolem();
+		golem->SetPosition(enemyTower->GetPosition());
+		golem->SetTarget(fort[2]);
+		EnemyManager::Instance().Register(golem);
+	}
+
+
 }
+
+
 
 // 終了化
 void SceneGame::Finalize()
@@ -125,6 +148,8 @@ void SceneGame::Finalize()
 
 	// エネミー終了化
 	EnemyManager::Instance().Clear();
+
+	PlayerMonsterManager::Instance().Clear();
 
 	//ステージ初期化
 	StageManager::Instance().Clear();
@@ -143,6 +168,12 @@ void SceneGame::Finalize()
 	{
 		delete ui;
 		ui = nullptr;
+	}
+
+	if (uiArrows)
+	{
+		delete uiArrows;
+		uiArrows = nullptr;
 	}
 }
 
@@ -166,6 +197,11 @@ void SceneGame::Update(float elapsedTime)
 	
 	// エネミー更新処理
 	EnemyManager::Instance().Update(elapsedTime);
+	EnemyManager::Instance().Attack();
+
+	PlayerMonsterManager::Instance().Update(elapsedTime);
+	PlayerMonsterManager::Instance().Attack();
+
 
 	//当たり判定処理
 	//player->CollisionPlayerVsEnemies();
@@ -205,6 +241,8 @@ void SceneGame::Render()
 
 		// エネミー描画
 		EnemyManager::Instance().Render(dc, shader);
+
+		PlayerMonsterManager::Instance().Render(dc, shader);
 
 		//ステージ描画
 		StageManager::Instance().Render(dc, shader);

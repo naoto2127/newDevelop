@@ -62,6 +62,14 @@ void EnemyManager::Remove(Enemy* enemy)
 	removes.insert(enemy);
 }
 
+void EnemyManager::Attack()
+{
+	for (Enemy* enemy : enemies)
+	{
+		enemy->Attack();
+	}
+}
+
 // “G“¯m‚ÌÕ“Ëˆ—
 void EnemyManager::CollisionEnemyVsEnemies()
 {

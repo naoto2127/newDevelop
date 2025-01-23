@@ -150,7 +150,6 @@
     <ClInclude Include="Source\Logger.h">
     </ClInclude>
     <ClInclude Include="Source\Misc.h">
-
     </ClInclude>
     <ClInclude Include="Source\SceneGame.h">
       <Filter>Source\Scene</Filter>
@@ -193,6 +192,21 @@
     </ClInclude>
     <ClInclude Include="Source\UI.h">
       <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ProjectileHoming.h" />
+    <ClInclude Include="Source\ProjectileManager.h" />
+    <ClInclude Include="Source\ProjectileStraight.h" />
+    <ClInclude Include="Source\PlayerMonster.h">
+      <Filter>Source\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerGolem.h">
+      <Filter>Source\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerMonsterManager.h">
+      <Filter>Source\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerSpider.h">
+      <Filter>Source\Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -317,6 +331,30 @@
     </ClCompile>
     <ClCompile Include="Source\UI.cpp">
       <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Projectile.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ProjectileHoming.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ProjectileManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ProjectileStraight.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerMonster.cpp">
+      <Filter>Source\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerGolem.cpp">
+      <Filter>Source\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerMonsterManager.cpp">
+      <Filter>Source\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerSpider.cpp">
+      <Filter>Source\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
