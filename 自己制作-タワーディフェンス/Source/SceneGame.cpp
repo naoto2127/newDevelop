@@ -95,7 +95,7 @@ void SceneGame::Initialize()
 				ui->SetButtonSpider(false);
 
 			}
-			});
+		});
 
 
 
@@ -119,17 +119,23 @@ void SceneGame::Initialize()
 
 		});
 	}
-
+	std::srand(static_cast<unsigned int>(std::time(nullptr)));
 	// エネミー初期化
-	for (int i = 0; i < 2; ++i)
+	for (int i = 0; i < 3; ++i)
 	{
-		int num = 0;
-		num = rand() % 4;
-		EnemyGolem* golem = new EnemyGolem();
-		golem->SetPosition(enemyTower->GetPosition());
-		golem->SetTarget(fort[2]);
-		EnemyManager::Instance().Register(golem);
+		int num = rand() % 3;
+		
+		//EnemyGolem* golem = new EnemyGolem();
+		//golem->SetPosition(enemyTower->GetPosition());
+		//golem->SetTarget(fort[2]);
+		EnemyManager::Instance().SpawnEnemy(fort[num], enemyTower);
+		//EnemyManager::Instance().Register(golem);
 	}
+
+
+	DirectX::XMFLOAT3 target = playerTower->GetPosition();
+	target.y += 0.5f;
+	cameraController->SetTarget(target);
 
 
 }
@@ -181,8 +187,8 @@ void SceneGame::Finalize()
 void SceneGame::Update(float elapsedTime)
 {
 	// カメラコントローラー更新処理
-	DirectX::XMFLOAT3 target = playerTower->GetPosition();
-	target.y += 0.5f;
+	/*DirectX::XMFLOAT3 target = playerTower->GetPosition();
+	target.y += 0.5f;*/
 	cameraController->SetTarget(target);
 	cameraController->Update(elapsedTime);
 
@@ -195,12 +201,13 @@ void SceneGame::Update(float elapsedTime)
 	//ステージ更新処理
 	StageManager::Instance().Update(elapsedTime);
 	
+	PlayerMonsterManager::Instance().Update(elapsedTime);
+
 	// エネミー更新処理
 	EnemyManager::Instance().Update(elapsedTime);
-	EnemyManager::Instance().Attack();
+	/*EnemyManager::Instance().Attack();*/
 
-	PlayerMonsterManager::Instance().Update(elapsedTime);
-	PlayerMonsterManager::Instance().Attack();
+	/*PlayerMonsterManager::Instance().Attack();*/
 
 
 	//当たり判定処理
@@ -303,6 +310,11 @@ void SceneGame::Render()
 			ui->DrawDebugGUI();
 
 			ImGui::TreePop();
+
+			ImGui::SliderFloat("camera_target.x", &target.x, -100.0f, +100.0f);
+			ImGui::SliderFloat("camera_target.y", &target.y, -100.0f, +100.0f);
+			ImGui::SliderFloat("camera_target.z", &target.z, -100.0f, +100.0f);
+
 		}
 	}
 }

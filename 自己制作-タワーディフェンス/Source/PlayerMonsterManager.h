@@ -29,7 +29,7 @@ public:
 	int GetMonsterCount() const { return static_cast<int>(monsters.size()); }
 	// プレイヤーのモンスター取得
 	PlayerMonster* GetMonster(int index) { return monsters.at(index); }
-	void Attack();
+	/*void Attack();*/
 	// 弾丸削除
 	void Remove(PlayerMonster* monster);
 private:

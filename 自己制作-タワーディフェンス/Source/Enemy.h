@@ -3,6 +3,13 @@
 #include "Graphics/Shader.h"
 #include "Character.h"
 
+#define EnemyTypeMax 2
+enum class EnemyType
+{
+	Golem,
+	Spider,
+};
+
 // エネミー
 class Enemy : public Character
 {

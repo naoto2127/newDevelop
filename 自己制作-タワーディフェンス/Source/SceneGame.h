@@ -73,6 +73,9 @@ private:
 
 	UI* ui{};
 
+	DirectX::XMFLOAT3 target;
+	float range;
+
 
 private:
 	float positionX; // ƒ{ƒ^ƒ“‚ÌXÀ•W

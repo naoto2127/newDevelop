@@ -57,6 +57,8 @@ void EnemyGolem::Update(float elapsedTime)
 		}
 	}
 
+	Attack();
+
 	// ‘¬—Íˆ—XV
 	UpdateVelocity(elapsedTime);
 

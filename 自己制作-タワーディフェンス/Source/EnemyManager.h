@@ -3,6 +3,7 @@
 #include <vector>
 #include "Enemy.h"
 #include <set>
+#include"Tower.h"
 
 // エネミー管理
 class EnemyManager
@@ -40,10 +41,14 @@ public:
 	// エネミー取得
 	Enemy* GetEnemy(int index) { return enemies.at(index); }
 
-	void Attack();
+	/*void Attack();*/
 
 	// 弾丸削除
 	void Remove(Enemy* enemy);
+
+	void SpawnEnemy(Tower* target,Tower*spawnTower);
+
+
 
 private:
 	// エネミー同士の衝突処理

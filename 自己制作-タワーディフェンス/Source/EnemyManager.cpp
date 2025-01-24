@@ -1,5 +1,7 @@
 #include "EnemyManager.h"
 #include "Collision.h"
+#include"EnemyGolem.h"
+#include"EnemySpider.h"
 
 void EnemyManager::Update(float elapsedTime)
 {
@@ -62,13 +64,38 @@ void EnemyManager::Remove(Enemy* enemy)
 	removes.insert(enemy);
 }
 
-void EnemyManager::Attack()
+void EnemyManager::SpawnEnemy(Tower* target,Tower*spawnTower)
 {
-	for (Enemy* enemy : enemies)
+	EnemyType enemyType = static_cast<EnemyType>(rand() % 2);
+
+	if (enemyType == EnemyType::Golem)
 	{
-		enemy->Attack();
+		EnemyGolem* golem = new EnemyGolem();
+		golem->SetPosition(spawnTower->GetPosition());
+		golem->SetTarget(target);
+		Register(golem);
 	}
+	else if(enemyType==EnemyType::Spider)
+	{
+
+		EnemySpider* spider = new EnemySpider();
+		spider->SetPosition(spawnTower->GetPosition());
+		spider->SetTarget(target);
+		Register(spider);
+	
+	}
+	
+	
+
 }
+
+//void EnemyManager::Attack()
+//{
+//	for (Enemy* enemy : enemies)
+//	{
+//		enemy->Attack();
+//	}
+//}
 
 // “G“¯m‚ÌÕ“Ëˆ—
 void EnemyManager::CollisionEnemyVsEnemies()

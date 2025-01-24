@@ -46,13 +46,13 @@ void PlayerMonsterManager::DrawDebugPrimitive()
 		monster->DrawDebugPrimitive();
 	}
 }
-void PlayerMonsterManager::Attack()
-{
-	for (PlayerMonster* monster : monsters)
-	{
-		monster->Attack();
-	}
-}
+//void PlayerMonsterManager::Attack()
+//{
+//	for (PlayerMonster* monster : monsters)
+//	{
+//		monster->Attack();
+//	}
+//}
 void PlayerMonsterManager::Remove(PlayerMonster* monster)
 {
 	removes.insert(monster);

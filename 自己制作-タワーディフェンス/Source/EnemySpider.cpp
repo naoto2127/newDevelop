@@ -77,6 +77,8 @@ void EnemySpider::Update(float elapsedTime)
 	//// 速力処理更新
 	//UpdateVelocity(elapsedTime);
 
+	Attack();
+
 	//// 無敵時間更新
 	UpdateInvincibleTimer(elapsedTime);
 

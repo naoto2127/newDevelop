@@ -11,10 +11,12 @@ Golem::Golem()
 	height = scale.y * 1000;
 	acceleration = 1.5f;
 }
+
 Golem::~Golem()
 {
 	delete model;
 }
+
 void Golem::Update(float elapsedTime)
 {
 	if (attackFlag)
@@ -46,6 +48,9 @@ void Golem::Update(float elapsedTime)
 		float newAngleY = atan2f(forward.x, forward.z); // Z軸を基準に回転角を計算
 		angle.y = newAngleY; // // Y軸回転を更新する
 	}
+
+	Attack();
+
 	// 速力処理更新
 	UpdateVelocity(elapsedTime);
 	// 無敵時間更新
@@ -55,15 +60,18 @@ void Golem::Update(float elapsedTime)
 	// モデル行列更新
 	model->UpdateTransform(transform);
 }
+
 void Golem::Render(ID3D11DeviceContext* dc, Shader* shader)
 {
 	shader->Draw(dc, model);
 }
+
 void Golem::OnDead()
 {
 	// 自信を破棄（Enemy クラス（基底クラス）の Destroy 関数を呼び出す）
 	Destroy();
 }
+
 void Golem::Attack()
 {
 	int enemyCount = EnemyManager::Instance().GetEnemyCount();

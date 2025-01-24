@@ -6,7 +6,7 @@ Spider::Spider()
 {
 	model = new Model("Data/Model/Spider/Spider.mdl");
 	// モデルが大きいのでスケーリング
-	scale.x = scale.y = scale.z = 0.003f;
+	scale.x = scale.y = scale.z = 0.01f;
 	radius = scale.x * 300;
 	height = scale.y * 1000;
 	acceleration = 1.5f;
@@ -46,6 +46,8 @@ void Spider::Update(float elapsedTime)
 		float newAngleY = atan2f(forward.x, forward.z); // Z軸を基準に回転角を計算
 		angle.y = newAngleY; // // Y軸回転を更新する
 	}
+
+	Attack();
 	// 速力処理更新
 	UpdateVelocity(elapsedTime);
 	// 無敵時間更新
