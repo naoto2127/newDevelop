@@ -132,6 +132,8 @@ void SceneGame::Initialize()
 		//EnemyManager::Instance().Register(golem);
 	}
 
+	spawnInterval = GetRandomSpawnInterval();  // 初期スポーン間隔を設定
+
 
 	DirectX::XMFLOAT3 target = playerTower->GetPosition();
 	target.y += 0.5f;
@@ -192,8 +194,25 @@ void SceneGame::Update(float elapsedTime)
 	cameraController->SetTarget(target);
 	cameraController->Update(elapsedTime);
 
+
 	//UI表示
 	ui->Update(elapsedTime);
+
+
+	// タイマーの更新
+	spawnTimer += elapsedTime;
+
+	// エネミーを生成する条件を確認
+	if (spawnTimer >= spawnInterval)
+	{
+		spawnTimer = 0.0f;                // タイマーリセット
+		spawnInterval = GetRandomSpawnInterval();  // 次回のスポーン間隔を設定
+
+		// ランダムにフォートを選んでエネミーを生成
+		int num = std::rand() % 3;
+		EnemyManager::Instance().SpawnEnemy(fort[num], enemyTower);
+	}
+
 	
 	//砦の更新処理
 	TowerManager::Instance().Update(elapsedTime);
@@ -505,4 +524,11 @@ void SceneGame::RenderEnemyArrows(
 			1.0f, 0.0f, 0.0f, 1.0f
 		);
 	}
+}
+
+
+float SceneGame::GetRandomSpawnInterval()
+{
+	// 5から10の範囲でランダムな間隔を生成
+	return 5.0f + static_cast<float>(std::rand() % 6);  // 5～10の整数値
 }

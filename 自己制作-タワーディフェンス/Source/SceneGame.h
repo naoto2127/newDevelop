@@ -48,6 +48,8 @@ private:
 	
 	//デバック表示（後で消す）
 	void DebugDrawGUI();
+
+	float GetRandomSpawnInterval();
 private:
 	enum
 	{
@@ -80,4 +82,7 @@ private:
 private:
 	float positionX; // ボタンのX座標
 	float positionY; // ボタンのY座標
+
+	float spawnInterval;        // 現在のスポーン間隔（秒）
+	float spawnTimer = 0.0f;    // 経過時間
 };
